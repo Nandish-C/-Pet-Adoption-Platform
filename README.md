@@ -108,7 +108,7 @@ A comprehensive full-stack web application for pet adoption, featuring user mana
 
 ### Step 1: Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Nandish-C/-Pet-Adoption-Platform
 cd pet-adoption-project
 ```
 
