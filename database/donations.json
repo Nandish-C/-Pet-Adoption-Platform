@@ -1,0 +1,43 @@
+[
+  {
+    "_id": "donation1",
+    "amount": 50,
+    "userId": "user1",
+    "shelterId": "shelter1",
+    "transactionToken": "txn_123",
+    "timestamp": "2024-01-03T14:00:00.000Z"
+  },
+  {
+    "_id": "68d9a628d73b06e10e06d82d",
+    "amount": 5000,
+    "transactionToken": "upi_1759094312837",
+    "frequency": "one-time",
+    "message": "donation",
+    "isAnonymous": false,
+    "status": "pending",
+    "paymentMethod": "upi",
+    "_class": "com.petadoption.backend.model.Donation"
+  },
+  {
+    "_id": "68d9a63ad73b06e10e06d82f",
+    "amount": 10000,
+    "transactionToken": "upi_1759094330141",
+    "frequency": "monthly",
+    "message": "",
+    "isAnonymous": false,
+    "status": "pending",
+    "paymentMethod": "upi",
+    "_class": "com.petadoption.backend.model.Donation"
+  },
+  {
+    "_id": "68d9b087d73b06e10e06d837",
+    "amount": 50000,
+    "transactionToken": "upi_1759096967711",
+    "frequency": "one-time",
+    "message": "for pets",
+    "isAnonymous": false,
+    "status": "pending",
+    "paymentMethod": "upi",
+    "_class": "com.petadoption.backend.model.Donation"
+  }
+]

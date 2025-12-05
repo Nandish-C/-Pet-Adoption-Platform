@@ -1,0 +1,17 @@
+{
+  "exportDate": "2025-09-29T00:08:36.181Z",
+  "database": "pet_adoption",
+  "collections": [
+    "shelters",
+    "adoptions",
+    "user_messages",
+    "users",
+    "payments",
+    "donations",
+    "chats",
+    "inquiries",
+    "pets",
+    "user_chats"
+  ],
+  "totalCollections": 10
+}

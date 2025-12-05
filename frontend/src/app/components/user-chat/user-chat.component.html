@@ -1,0 +1,132 @@
+<div class="chat-container">
+  <!-- Sidebar -->
+  <div class="chat-sidebar">
+    <div class="sidebar-header">
+      <div class="header-content">
+        <span class="header-icon">💬</span>
+        <h3>Messages</h3>
+      </div>
+      <button class="btn-new-chat" (click)="showNewChat = !showNewChat" title="Start New Chat">
+        <span class="btn-icon">➕</span>
+        <span class="btn-text">New Chat</span>
+      </button>
+    </div>
+
+    <!-- New Chat Form -->
+    <div class="new-chat-form" *ngIf="showNewChat">
+      <div class="form-group">
+        <label class="form-label">
+          <span class="label-icon">👤</span> Select User
+        </label>
+        <select class="form-select" [(ngModel)]="selectedUserId" aria-label="Select a user">
+          <option value="">Choose a user to chat with...</option>
+          <option *ngFor="let user of users" [value]="user.id">
+            {{ user.name }}
+          </option>
+        </select>
+      </div>
+      <button class="btn-start-chat" (click)="startNewChat()" [disabled]="!selectedUserId">
+        <span class="btn-icon">🚀</span>
+        <span class="btn-text">Start Conversation</span>
+      </button>
+    </div>
+
+    <!-- Chat List -->
+    <div class="chat-list">
+      <div
+        class="chat-item"
+        *ngFor="let chat of chats"
+        [class.active]="selectedChat?.id === chat.id"
+        (click)="selectChat(chat)">
+        <div class="chat-avatar">
+          <span class="avatar-emoji">👤</span>
+        </div>
+        <div class="chat-info">
+          <div class="chat-name">{{ getChatDisplayName(chat) }}</div>
+          <div class="chat-last-message" *ngIf="chat.messages && chat.messages.length > 0">
+            {{ chat.messages[chat.messages.length - 1].content }}
+          </div>
+          <div class="chat-time" *ngIf="chat.messages && chat.messages.length > 0">
+            {{ getMessageTime(chat.messages[chat.messages.length - 1].timestamp) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Chat Area -->
+  <div class="chat-main">
+    <div class="chat-messages" *ngIf="selectedChat; else noChatSelected">
+      <!-- Chat Header -->
+      <div class="chat-header">
+        <div class="chat-partner">
+          <span class="partner-avatar">👤</span>
+          <div class="partner-info">
+            <h4>{{ getChatDisplayName(selectedChat) }}</h4>
+            <span class="partner-status">Active now</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages Container -->
+      <div class="messages-container" #messagesContainer>
+        <div
+          class="message-wrapper"
+          *ngFor="let message of messages"
+          [class.sent]="isMessageFromCurrentUser(message)"
+          [class.received]="!isMessageFromCurrentUser(message)">
+          <div class="message-bubble">
+            <div class="message-content">{{ message.content }}</div>
+            <div class="message-time">{{ getMessageTime(message.timestamp) }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Input -->
+      <div class="message-input">
+        <div class="input-container">
+          <input
+            type="text"
+            class="message-input-field"
+            placeholder="Type your message here... 💭"
+            [(ngModel)]="newMessage"
+            (keyup.enter)="sendMessage()"
+            maxlength="500">
+          <button class="btn-send" (click)="sendMessage()" [disabled]="!newMessage.trim()">
+            <span class="send-icon">📤</span>
+          </button>
+        </div>
+        <div class="input-footer">
+          <span class="char-count" [class.warning]="newMessage.length > 450">
+            {{ newMessage.length }}/500
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Chat Selected Template -->
+    <ng-template #noChatSelected>
+      <div class="no-chat-selected">
+        <div class="empty-state">
+          <div class="empty-icon">💬</div>
+          <h4>Welcome to Pet Chat!</h4>
+          <p>Select a conversation from the sidebar or start a new chat to connect with fellow pet lovers.</p>
+          <div class="empty-features">
+            <div class="feature">
+              <span class="feature-icon">🐾</span>
+              <span>Share pet stories</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon">❤️</span>
+              <span>Get adoption advice</span>
+            </div>
+            <div class="feature">
+              <span class="feature-icon">📸</span>
+              <span>Share pet photos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

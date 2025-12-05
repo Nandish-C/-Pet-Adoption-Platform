@@ -1,0 +1,847 @@
+<div class="admin-container">
+  <h2>Admin Management</h2>
+
+  <!-- Navigation Menu -->
+  <div class="admin-nav mb-4">
+    <button class="btn btn-primary me-2" (click)="setActiveSection('dashboard')" [class.active]="activeSection === 'dashboard'">
+      <i class="bi bi-house"></i> Dashboard
+    </button>
+    <button class="btn btn-success me-2" (click)="setActiveSection('pets')" [class.active]="activeSection === 'pets'">
+      <i class="bi bi-heart"></i> Pet Management
+    </button>
+    <button class="btn btn-info me-2" (click)="setActiveSection('users')" [class.active]="activeSection === 'users'">
+      <i class="bi bi-people"></i> User Management
+    </button>
+    <button class="btn btn-warning me-2" (click)="setActiveSection('adoptions')" [class.active]="activeSection === 'adoptions'">
+      <i class="bi bi-check-circle"></i> Adoption
+    </button>
+    <button class="btn btn-secondary me-2" (click)="setActiveSection('donations')" [class.active]="activeSection === 'donations'">
+      <i class="bi bi-cash"></i> Donation
+    </button>
+    <button class="btn btn-primary me-2" (click)="setActiveSection('payments')" [class.active]="activeSection === 'payments'">
+      <i class="bi bi-credit-card"></i> Payment Management
+    </button>
+    <button class="btn btn-dark me-2" (click)="setActiveSection('shelters')" [class.active]="activeSection === 'shelters'">
+      <i class="bi bi-building"></i> Shelter Management
+    </button>
+    <button class="btn btn-light me-2" (click)="setActiveSection('inquiries')" [class.active]="activeSection === 'inquiries'">
+      <i class="bi bi-question-circle"></i> Inquiry Management
+    </button>
+    <button class="btn btn-success me-2" (click)="setActiveSection('matching')" [class.active]="activeSection === 'matching'">
+      <i class="bi bi-link"></i> Manual Matching
+    </button>
+    <button class="btn btn-warning me-2" (click)="setActiveSection('chats')" [class.active]="activeSection === 'chats'">
+      <i class="bi bi-chat"></i> Chat Management
+    </button>
+    <button class="btn btn-info me-2" (click)="navigateToUserChat()">
+      <i class="bi bi-chat-dots"></i> User Chat
+    </button>
+  </div>
+
+  <!-- Dashboard Section -->
+  @if (activeSection === 'dashboard') {
+  <div class="dashboard-section">
+    <div class="row">
+      @for (stat of [
+        { title: 'Total Pets', value: dashboardStats.totalPets, icon: 'bi-heart', color: 'primary' },
+        { title: 'Total Users', value: dashboardStats.totalUsers, icon: 'bi-people', color: 'secondary' },
+        { title: 'Total Adoptions', value: dashboardStats.totalAdoptions, icon: 'bi-check-circle', color: 'success' },
+        { title: 'Total Donations', value: dashboardStats.totalDonations, icon: 'bi-cash', color: 'warning' },
+        { title: 'Available Pets', value: dashboardStats.availablePets, icon: 'bi-check-circle-fill', color: 'info' },
+        { title: 'Adopted Pets', value: dashboardStats.adoptedPets, icon: 'bi-heart-fill', color: 'danger' },
+        { title: 'Total Payments', value: dashboardStats.totalPayments, icon: 'bi-credit-card', color: 'primary' },
+        { title: 'Total Revenue', value: '₹' + dashboardStats.totalRevenue, icon: 'bi-currency-rupee', color: 'success' },
+        { title: 'Successful Payments', value: dashboardStats.successfulPayments, icon: 'bi-check-circle-fill', color: 'success' },
+        { title: 'Pending Payments', value: dashboardStats.pendingPayments, icon: 'bi-clock', color: 'warning' },
+        { title: 'Refunded Payments', value: dashboardStats.refundedPayments, icon: 'bi-arrow-counterclockwise', color: 'danger' }
+      ]; track stat.title) {
+      <div class="col-md-3 mb-3">
+        <div class="card text-center">
+          <div class="card-body">
+            <i class="bi {{ stat.icon }} fs-1 text-{{ stat.color }}"></i>
+            <h3 class="card-title">{{ stat.value }}</h3>
+            <p class="card-text">{{ stat.title }}</p>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Report Generation Button -->
+    <div class="mt-4 text-center">
+      <button class="btn btn-primary btn-lg" (click)="generateReport()">
+        <i class="bi bi-file-earmark-spreadsheet me-2"></i> Generate Report
+      </button>
+    </div>
+  </div>
+  }
+
+  <!-- Generic Form for Adding/Editing Items -->
+  @if (showForm) {
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>{{ editingItem ? 'Edit' : 'Add New' }} {{ activeSection | titlecase }}</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="saveItem(activeSection)">
+        <div class="row">
+          <!-- Dynamic form fields based on section -->
+          @if (activeSection === 'pets') {
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).name" name="name" required aria-label="Pet Name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Species</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).species" name="species" required aria-label="Pet Species">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Breed</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).breed" name="breed" required aria-label="Pet Breed">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Age</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).age" name="age" required aria-label="Pet Age">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" [(ngModel)]="(editingItem || newItem).description" name="description" rows="3" aria-label="Pet Description"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-control" [(ngModel)]="(editingItem || newItem).status" name="status" required aria-label="Pet Status">
+                <option value="available">Available</option>
+                <option value="adopted">Adopted</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Size</label>
+              <select class="form-control" [(ngModel)]="(editingItem || newItem).size" name="size" aria-label="Pet Size">
+                <option value="">Select Size</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Energy Level</label>
+              <select class="form-control" [(ngModel)]="(editingItem || newItem).energyLevel" name="energyLevel" aria-label="Pet Energy Level">
+                <option value="">Select Energy Level</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Max Budget (Rupees)</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).maxBudget" name="maxBudget" aria-label="Pet Max Budget">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Adoption Fee (Rupees)</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).adoptionFee" name="adoptionFee" aria-label="Pet Adoption Fee">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Pet Image</label>
+              <input type="file" class="form-control" accept="image/*" (change)="onFileSelected($event)" aria-label="Pet Image">
+              <small class="form-text text-muted">Select an image file (max 5MB)</small>
+            </div>
+            @if (imagePreview) {
+            <div class="mb-3">
+              <label class="form-label">Image Preview</label>
+              <div class="text-center">
+                <img [src]="imagePreview" alt="Pet Image Preview" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+              </div>
+            </div>
+            }
+            @if (editingItem?.imageUrl && !imagePreview) {
+            <div class="mb-3">
+              <label class="form-label">Current Image</label>
+              <div class="text-center">
+                <img [src]="'http://localhost:8080' + editingItem.imageUrl" alt="Current Pet Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+              </div>
+            </div>
+            }
+          </div>
+          }
+          @if (activeSection === 'users') {
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).name" name="name" required aria-label="User Name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" [(ngModel)]="(editingItem || newItem).email" name="email" required aria-label="User Email">
+            </div>
+            @if (!editingItem) {
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" [(ngModel)]="(editingItem || newItem).password" name="password" required aria-label="User Password">
+            </div>
+            }
+            <div class="mb-3">
+              <label class="form-label">Role</label>
+              <select class="form-control" [(ngModel)]="(editingItem || newItem).role" name="role" required aria-label="User Role">
+                <option value="USER">User</option>
+                <option value="ADMIN">Admin</option>
+              </select>
+            </div>
+          </div>
+          }
+          @if (activeSection === 'shelters') {
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).name" name="name" required aria-label="Shelter Name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).location" name="location" required aria-label="Shelter Location">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).phone" name="phone" aria-label="Shelter Phone">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" [(ngModel)]="(editingItem || newItem).email" name="email" aria-label="Shelter Email">
+            </div>
+          </div>
+          }
+          @if (activeSection === 'adoptions') {
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">User ID</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).userId" name="userId" required aria-label="User ID">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Pet ID</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).petId" name="petId" required aria-label="Pet ID">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-control" [(ngModel)]="(editingItem || newItem).status" name="status" required aria-label="Adoption Status">
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+          </div>
+          }
+          @if (activeSection === 'donations') {
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Amount</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).amount" name="amount" required aria-label="Donation Amount">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">User ID</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).userId" name="userId" aria-label="User ID">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Shelter ID</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).shelterId" name="shelterId" aria-label="Shelter ID">
+            </div>
+          </div>
+          }
+          @if (activeSection === 'payments') {
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">User ID</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).userId" name="userId" required aria-label="User ID">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Pet ID</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).petId" name="petId" required aria-label="Pet ID">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Adoption ID</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).adoptionId" name="adoptionId" aria-label="Adoption ID">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Amount</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).amount" name="amount" required aria-label="Amount">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-control" [(ngModel)]="(editingItem || newItem).status" name="status" required aria-label="Payment Status">
+                <option value="pending">Pending</option>
+                <option value="succeeded">Succeeded</option>
+                <option value="failed">Failed</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Stripe Payment Intent ID</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).stripePaymentIntentId" name="stripePaymentIntentId" aria-label="Stripe Payment Intent ID">
+            </div>
+          </div>
+          }
+          @if (activeSection === 'inquiries') {
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" [(ngModel)]="(editingItem || newItem).message" name="message" rows="3" required aria-label="Inquiry Message"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">User ID</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).userId" name="userId" aria-label="User ID">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Pet ID</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).petId" name="petId" aria-label="Pet ID">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Chat ID</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).chatId" name="chatId" aria-label="Chat ID">
+            </div>
+          </div>
+          }
+        </div>
+
+        <button type="submit" class="btn btn-success me-2">{{ editingItem ? 'Update' : 'Add' }} {{ activeSection | titlecase }}</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  }
+
+  <!-- Data Tables for Each Section -->
+  @if (!showForm) {
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5>{{ activeSection | titlecase }} Management</h5>
+      <button *ngIf="activeSection === 'pets' || activeSection === 'users' || activeSection === 'shelters' || activeSection === 'adoptions' || activeSection === 'donations' || activeSection === 'inquiries' || activeSection === 'payments'" class="btn btn-primary btn-sm" (click)="showAddForm(activeSection)">
+        <i class="bi bi-plus"></i> Add New
+      </button>
+    </div>
+    <div class="card-body">
+      <!-- Adoptions Table -->
+      @if (activeSection === 'adoptions') {
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User ID</th>
+              <th>Pet ID</th>
+              <th>Status</th>
+              <th>Created At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (adoption of adoptions; track adoption.id) {
+            <tr>
+              <td>{{ adoption.id }}</td>
+              <td>{{ adoption.userId }}</td>
+              <td>{{ adoption.petId }}</td>
+              <td><span class="badge" [class]="adoption.status === 'pending' ? 'bg-warning' : adoption.status === 'approved' ? 'bg-success' : adoption.status === 'rejected' ? 'bg-danger' : 'bg-info'">{{ adoption.status }}</span></td>
+              <td>{{ adoption.createdAt }}</td>
+              <td>
+                @if (adoption.status === 'pending') {
+                <button class="btn btn-sm btn-outline-success me-2" (click)="approveAdoption(adoption)">Approve</button>
+                <button class="btn btn-sm btn-outline-danger me-2" (click)="rejectAdoption(adoption)">Reject</button>
+                }
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('adoptions', adoption.id)">Delete</button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+
+      <!-- Adopted Pets Table -->
+      <div *ngIf="activeSection === 'adopted-pets'" class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Pet ID</th>
+              <th>Pet Name</th>
+              <th>User ID</th>
+              <th>User Name</th>
+              <th>Adoption Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let adoptedPet of adoptedPets">
+              <td>{{ adoptedPet.id }}</td>
+              <td>{{ adoptedPet.petId }}</td>
+              <td>{{ adoptedPet.petName }}</td>
+              <td>{{ adoptedPet.userId }}</td>
+              <td>{{ adoptedPet.userName }}</td>
+              <td>{{ adoptedPet.adoptionDate }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('adopted-pets', adoptedPet.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chats Table -->
+      <div *ngIf="activeSection === 'chats'" class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User ID</th>
+              <th>Pet ID</th>
+              <th>Status</th>
+              <th>Started At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let chat of chats">
+              <td>{{ chat.id }}</td>
+              <td>{{ chat.userId }}</td>
+              <td>{{ chat.petId }}</td>
+              <td><span class="badge bg-info">{{ chat.status }}</span></td>
+              <td>{{ chat.startedAt }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="openChat(chat)">View Chat</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('chats', chat.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Donations Table -->
+      <div *ngIf="activeSection === 'donations'" class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Amount</th>
+              <th>User ID</th>
+              <th>Shelter ID</th>
+              <th>Timestamp</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let donation of donations">
+              <td>{{ donation.id }}</td>
+              <td>₹{{ donation.amount }}</td>
+              <td>{{ donation.userId || 'N/A' }}</td>
+              <td>{{ donation.shelterId || 'N/A' }}</td>
+              <td>{{ donation.timestamp }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('donations', donation.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Payments Table -->
+      <div *ngIf="activeSection === 'payments'" class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User ID</th>
+              <th>Pet ID</th>
+              <th>Adoption ID</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Stripe Intent ID</th>
+              <th>Created At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let payment of payments">
+              <td>{{ payment.id }}</td>
+              <td>{{ payment.userId }}</td>
+              <td>{{ payment.petId }}</td>
+              <td>{{ payment.adoptionId || 'N/A' }}</td>
+              <td>₹{{ payment.amount }}</td>
+              <td><span class="badge" [class.bg-success]="payment.status === 'succeeded'" [class.bg-warning]="payment.status === 'pending'" [class.bg-danger]="payment.status === 'failed'">{{ payment.status }}</span></td>
+              <td>{{ payment.stripePaymentIntentId || 'N/A' }}</td>
+              <td>{{ payment.createdAt }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="editItem('payments', payment)">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('payments', payment.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Inquiries Table -->
+      <div *ngIf="activeSection === 'inquiries'" class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Message</th>
+              <th>User ID</th>
+              <th>Pet ID</th>
+              <th>Chat ID</th>
+              <th>Timestamp</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let inquiry of inquiries">
+              <td>{{ inquiry.id }}</td>
+              <td>{{ inquiry.message }}</td>
+              <td>{{ inquiry.userId || 'N/A' }}</td>
+              <td>{{ inquiry.petId || 'N/A' }}</td>
+              <td>{{ inquiry.chatId || 'N/A' }}</td>
+              <td>{{ inquiry.timestamp }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('inquiries', inquiry.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pet Filters -->
+      @if (activeSection === 'pets') {
+      <div class="mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h6>Filter Pets</h6>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-2">
+                <label class="form-label">Species</label>
+                <input type="text" class="form-control" [(ngModel)]="petFilters.species" placeholder="e.g., Dog, Cat" (input)="applyPetFilters()" aria-label="Species" name="species">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Breed</label>
+                <input type="text" class="form-control" [(ngModel)]="petFilters.breed" placeholder="e.g., Labrador" (input)="applyPetFilters()" aria-label="Breed" name="breed">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Min Age</label>
+                <input type="number" class="form-control" [(ngModel)]="petFilters.ageRange.min" (input)="applyPetFilters()" aria-label="Min Age" placeholder="0" name="minAge">
+              </div>
+              <div class="col-md-1">
+                <label class="form-label">Max Age</label>
+                <input type="number" class="form-control" [(ngModel)]="petFilters.ageRange.max" (input)="applyPetFilters()" aria-label="Max Age" placeholder="20" name="maxAge">
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Size</label>
+                <select class="form-control" [(ngModel)]="petFilters.size" (change)="applyPetFilters()" aria-label="Size" name="size">
+                  <option value="">All Sizes</option>
+                  <option value="small">Small</option>
+                  <option value="medium">Medium</option>
+                  <option value="large">Large</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Energy Level</label>
+                <select class="form-control" [(ngModel)]="petFilters.energyLevel" (change)="applyPetFilters()" aria-label="Energy Level" name="energyLevel">
+                  <option value="">All Levels</option>
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Max Budget (₹)</label>
+                <input type="number" class="form-control" [(ngModel)]="petFilters.maxBudget" placeholder="Max budget" (input)="applyPetFilters()" aria-label="Max Budget" name="maxBudget">
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-2">
+                <label class="form-label">Status</label>
+                <select class="form-control" [(ngModel)]="petFilters.status" (change)="applyPetFilters()" aria-label="Status" name="status">
+                  <option value="">All Status</option>
+                  <option value="available">Available</option>
+                  <option value="adopted">Adopted</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Good with Kids</label>
+                <select class="form-control" [(ngModel)]="petFilters.goodWithKids" (change)="applyPetFilters()" aria-label="Good with Kids" name="goodWithKids">
+                  <option [ngValue]="null">Any</option>
+                  <option [ngValue]="true">Yes</option>
+                  <option [ngValue]="false">No</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label class="form-label">Good with Pets</label>
+                <select class="form-control" [(ngModel)]="petFilters.goodWithPets" (change)="applyPetFilters()" aria-label="Good with Pets" name="goodWithPets">
+                  <option [ngValue]="null">Any</option>
+                  <option [ngValue]="true">Yes</option>
+                  <option [ngValue]="false">No</option>
+                </select>
+              </div>
+              <div class="col-md-2 d-flex align-items-end">
+                <button class="btn btn-secondary" (click)="clearPetFilters()">Clear Filters</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+
+      <!-- Pets Table -->
+      @if (activeSection === 'pets') {
+      <div class="table-responsive">
+        <div class="mb-2">
+          <strong>Showing {{ filteredPets.length }} of {{ pets.length }} pets</strong>
+        </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Species</th>
+              <th>Breed</th>
+              <th>Age</th>
+              <th>Size</th>
+              <th>Energy</th>
+              <th>Max Budget</th>
+              <th>Adoption Fee</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (pet of filteredPets; track pet.id) {
+            <tr>
+              <td>{{ pet.id }}</td>
+              <td>{{ pet.name }}</td>
+              <td>{{ pet.species }}</td>
+              <td>{{ pet.breed }}</td>
+              <td>{{ pet.age }}</td>
+              <td>{{ pet.size || 'N/A' }}</td>
+              <td>{{ pet.energyLevel || 'N/A' }}</td>
+              <td>{{ pet.maxBudget ? '₹' + pet.maxBudget : 'N/A' }}</td>
+              <td>{{ pet.adoptionFee ? '₹' + pet.adoptionFee : 'N/A' }}</td>
+              <td><span class="badge" [class]="pet.status === 'available' ? 'bg-success' : 'bg-warning'">{{ pet.status }}</span></td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="editItem('pets', pet)">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('pets', pet.id)">Delete</button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+
+      <!-- Users Table -->
+      <div *ngIf="activeSection === 'users'" class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td><span class="badge bg-info">{{ user.role }}</span></td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="editItem('users', user)">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('users', user.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Shelters Table -->
+      <div *ngIf="activeSection === 'shelters'" class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let shelter of shelters">
+              <td>{{ shelter.id }}</td>
+              <td>{{ shelter.name }}</td>
+              <td>{{ shelter.location }}</td>
+              <td>{{ shelter.phone || 'N/A' }}</td>
+              <td>{{ shelter.email || 'N/A' }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-2" (click)="editItem('shelters', shelter)">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteItem('shelters', shelter.id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Matching Section -->
+      <div *ngIf="activeSection === 'matching'">
+        <!-- Matching Stats -->
+        <div class="row mb-4">
+          <div class="col-md-4">
+            <div class="card text-center">
+              <div class="card-body">
+                <i class="bi bi-graph-up fs-1 text-primary"></i>
+                <h3 class="card-title">{{ matchingStats.totalMatchesGenerated }}</h3>
+                <p class="card-text">Total Matches Generated</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-center">
+              <div class="card-body">
+                <i class="bi bi-check-circle fs-1 text-success"></i>
+                <h3 class="card-title">{{ matchingStats.successfulMatches }}</h3>
+                <p class="card-text">Successful Matches</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card text-center">
+              <div class="card-body">
+                <i class="bi bi-clock fs-1 text-warning"></i>
+                <h3 class="card-title">{{ matchingStats.pendingMatches }}</h3>
+                <p class="card-text">Pending Matches</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manual Matching Interface -->
+        <div class="row">
+          <!-- Inquiries List -->
+          <div class="col-md-6">
+            <h5>Select Inquiry</h5>
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Message</th>
+                    <th>User ID</th>
+                    <th>Timestamp</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let inquiry of inquiries" [class.table-primary]="selectedInquiry?.id === inquiry.id">
+                    <td>{{ inquiry.id }}</td>
+                    <td>{{ inquiry.message | slice:0:50 }}...</td>
+                    <td>{{ inquiry.userId }}</td>
+                    <td>{{ inquiry.timestamp | date:'short' }}</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-primary" (click)="selectInquiryForMatch(inquiry)">Select</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Pets List -->
+          <div class="col-md-6">
+            <h5>Select Pet</h5>
+            <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Species</th>
+                    <th>Breed</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pet of pets" [class.table-success]="selectedPetForMatch?.id === pet.id">
+                    <td>{{ pet.id }}</td>
+                    <td>{{ pet.name }}</td>
+                    <td>{{ pet.species }}</td>
+                    <td>{{ pet.breed }}</td>
+                    <td><span class="badge" [class]="pet.status === 'available' ? 'bg-success' : 'bg-warning'">{{ pet.status }}</span></td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-success" (click)="selectPetForMatch(pet)" [disabled]="pet.status !== 'available'">Select</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Matching Actions -->
+        <div class="mt-4 text-center" *ngIf="selectedInquiry && selectedPetForMatch">
+          <div class="alert alert-info">
+            <strong>Selected:</strong> Inquiry #{{ selectedInquiry.id }} with Pet "{{ selectedPetForMatch.name }}"
+          </div>
+          <button class="btn btn-success me-2" (click)="assignPetToInquiry()">Assign Pet to Inquiry</button>
+          <button class="btn btn-secondary" (click)="cancelMatch()">Cancel Selection</button>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      @if (getCurrentDataArray().length === 0 && activeSection !== 'matching') {
+      <div class="text-center mt-4">
+        <p class="text-muted">No {{ activeSection }} found.</p>
+      </div>
+      }
+    </div>
+  </div>
+  }
+
+  <!-- Chat Modal -->
+  @if (selectedChat) {
+  <div class="modal fade show" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="false" style="display: block;">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="chatModalLabel">Chat with User #{{ selectedChat?.userId }}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeChatModal()"></button>
+        </div>
+        <div class="modal-body">
+          <div class="chat-messages" style="max-height: 400px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 5px; padding: 10px; margin-bottom: 15px;">
+            @for (message of chatMessages; track message.id) {
+            <div class="message mb-3" [ngClass]="{'text-end': message.senderType === 'admin'}">
+              <div class="message-bubble d-inline-block p-2 rounded" [ngClass]="message.senderType === 'admin' ? 'bg-primary text-white' : 'bg-light'">
+                <strong>{{ message.senderType === 'admin' ? 'Admin' : 'User' }}:</strong> {{ message.message }}
+                <br>
+                <small class="text-muted">{{ message.timestamp | date:'short' }}</small>
+              </div>
+            </div>
+            }
+            @if (chatMessages.length === 0) {
+            <div class="text-center text-muted">
+              No messages in this chat yet.
+            </div>
+            }
+          </div>
+          <div class="chat-input">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Type your reply..." [(ngModel)]="newMessage" (keyup.enter)="sendReply()">
+              <button class="btn btn-primary" type="button" (click)="sendReply()" [disabled]="!newMessage.trim()">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Backdrop -->
+  <div class="modal-backdrop fade show" (click)="closeChatModal()"></div>
+  }
+</div>

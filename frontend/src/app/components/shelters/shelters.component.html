@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2>Animal Shelters</h2>
+  <p class="text-muted">Find and support local animal shelters in your area.</p>
+
+  <div *ngIf="loading" class="text-center">
+    <p>Loading shelters...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && shelters.length === 0" class="alert alert-info">
+    No shelters found.
+  </div>
+
+  <div *ngIf="shelters.length > 0" class="row">
+    <div *ngFor="let shelter of shelters" class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ shelter.name }}</h5>
+          <p class="card-text"><strong>Location:</strong> {{ shelter.location }}</p>
+          <p class="card-text"><strong>Phone:</strong> {{ shelter.phone }}</p>
+          <p class="card-text"><strong>Email:</strong> {{ shelter.email }}</p>
+          <p class="card-text" *ngIf="shelter.description">{{ shelter.description }}</p>
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary btn-sm" (click)="viewShelterDetails(shelter.id)">View Details</button>
+            <button class="btn btn-success btn-sm" (click)="contactShelter(shelter)">Contact</button>
+            <button class="btn btn-warning btn-sm" (click)="donateToShelter(shelter.id)">Donate</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

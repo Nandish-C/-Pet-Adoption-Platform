@@ -1,0 +1,30 @@
+/* Styles for payment history */
+.payment-history {
+  padding: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.payment-item {
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.payment-item h3 {
+  margin: 0 0 10px 0;
+}
+
+.payment-details {
+  display: flex;
+  justify-content: space-between;
+}

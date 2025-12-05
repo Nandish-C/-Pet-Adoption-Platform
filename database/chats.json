@@ -1,0 +1,184 @@
+[
+  {
+    "_id": "chat1",
+    "userId": "user1",
+    "petId": "pet1",
+    "startedAt": "2024-01-01T10:00:00.000Z",
+    "endedAt": null,
+    "status": "active"
+  },
+  {
+    "_id": "chat2",
+    "userId": "user2",
+    "petId": "pet3",
+    "startedAt": "2024-01-02T14:30:00.000Z",
+    "endedAt": null,
+    "status": "active"
+  },
+  {
+    "_id": "chat3",
+    "userId": "user3",
+    "petId": "pet4",
+    "startedAt": "2024-01-03T09:15:00.000Z",
+    "endedAt": null,
+    "status": "active"
+  },
+  {
+    "_id": "chat4",
+    "userId": "user1",
+    "petId": "pet5",
+    "startedAt": "2024-01-04T16:45:00.000Z",
+    "endedAt": null,
+    "status": "active"
+  },
+  {
+    "_id": "68d9b4cbd73b06e10e06d847",
+    "startedAt": "2025-09-28T22:20:59.779Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9b633d73b06e10e06d84d",
+    "startedAt": "2025-09-28T22:26:59.697Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9b8c1d73b06e10e06d851",
+    "startedAt": "2025-09-28T22:37:53.127Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9b8c7d73b06e10e06d852",
+    "startedAt": "2025-09-28T22:37:59.678Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9ba9476ee76dd38ab6858",
+    "startedAt": "2025-09-28T22:45:40.820Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9ba9b76ee76dd38ab6859",
+    "startedAt": "2025-09-28T22:45:47.410Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bb0576ee76dd38ab685a",
+    "startedAt": "2025-09-28T22:47:33.362Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bb5c76ee76dd38ab685b",
+    "startedAt": "2025-09-28T22:49:00.819Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bbde76ee76dd38ab685c",
+    "startedAt": "2025-09-28T22:51:10.239Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bbe376ee76dd38ab685d",
+    "startedAt": "2025-09-28T22:51:15.935Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bccc76ee76dd38ab685f",
+    "startedAt": "2025-09-28T22:55:08.347Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bcfd76ee76dd38ab6860",
+    "startedAt": "2025-09-28T22:55:57.178Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bd1576ee76dd38ab6861",
+    "startedAt": "2025-09-28T22:56:21.902Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bdf976ee76dd38ab686a",
+    "startedAt": "2025-09-28T23:00:09.424Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9be5176ee76dd38ab686c",
+    "startedAt": "2025-09-28T23:01:37.138Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bed376ee76dd38ab6870",
+    "startedAt": "2025-09-28T23:03:47.163Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bed676ee76dd38ab6871",
+    "startedAt": "2025-09-28T23:03:50.745Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bee076ee76dd38ab6872",
+    "startedAt": "2025-09-28T23:04:00.525Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bef476ee76dd38ab6873",
+    "startedAt": "2025-09-28T23:04:20.063Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bfb876ee76dd38ab6874",
+    "startedAt": "2025-09-28T23:07:36.039Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9bff476ee76dd38ab6875",
+    "startedAt": "2025-09-28T23:08:36.112Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9c02876ee76dd38ab6877",
+    "startedAt": "2025-09-28T23:09:28.544Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9c6fd60163a872fedd6fc",
+    "startedAt": "2025-09-28T23:38:37.231Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9ca1360163a872fedd70b",
+    "startedAt": "2025-09-28T23:51:47.192Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  },
+  {
+    "_id": "68d9ca9860163a872fedd70c",
+    "startedAt": "2025-09-28T23:54:00.983Z",
+    "status": "ACTIVE",
+    "_class": "com.petadoption.backend.model.Chat"
+  }
+]

@@ -1,0 +1,130 @@
+[
+  {
+    "_id": "inquiry1",
+    "message": "Interested in adopting Buddy",
+    "userId": "user1",
+    "petId": "pet1",
+    "chatId": "chat1",
+    "timestamp": "2024-01-01T10:05:00.000Z",
+    "senderType": "user"
+  },
+  {
+    "_id": "inquiry2",
+    "message": "Is Max good with children?",
+    "userId": "user2",
+    "petId": "pet3",
+    "chatId": "chat2",
+    "timestamp": "2024-01-02T14:35:00.000Z",
+    "senderType": "user"
+  },
+  {
+    "_id": "inquiry3",
+    "message": "How old is Luna?",
+    "userId": "user3",
+    "petId": "pet4",
+    "chatId": "chat3",
+    "timestamp": "2024-01-03T09:20:00.000Z",
+    "senderType": "user"
+  },
+  {
+    "_id": "inquiry4",
+    "message": "Can I meet Charlie this weekend?",
+    "userId": "user1",
+    "petId": "pet5",
+    "chatId": "chat4",
+    "timestamp": "2024-01-04T16:50:00.000Z",
+    "senderType": "user"
+  },
+  {
+    "_id": "68d9b392d73b06e10e06d844",
+    "message": "hey",
+    "timestamp": "2025-09-28T22:15:46.445Z",
+    "senderType": "user",
+    "chat": {
+      "$ref": "chats",
+      "$id": "68d9b375d73b06e10e06d843"
+    },
+    "_class": "com.petadoption.backend.model.Inquiry"
+  },
+  {
+    "_id": "68d9b462d73b06e10e06d846",
+    "message": "hello",
+    "timestamp": "2025-09-28T22:19:14.919Z",
+    "senderType": "user",
+    "chat": {
+      "$ref": "chats",
+      "$id": "68d9b459d73b06e10e06d845"
+    },
+    "_class": "com.petadoption.backend.model.Inquiry"
+  },
+  {
+    "_id": "68d9b4d0d73b06e10e06d848",
+    "message": "helo",
+    "timestamp": "2025-09-28T22:21:04.712Z",
+    "senderType": "user",
+    "chat": {
+      "$ref": "chats",
+      "$id": "68d9b4cbd73b06e10e06d847"
+    },
+    "_class": "com.petadoption.backend.model.Inquiry"
+  },
+  {
+    "_id": "68d9b57ed73b06e10e06d849",
+    "message": "i want pet detail's",
+    "timestamp": "2025-09-28T22:23:58.348Z",
+    "senderType": "user",
+    "chat": {
+      "$ref": "chats",
+      "$id": "68d9b4cbd73b06e10e06d847"
+    },
+    "_class": "com.petadoption.backend.model.Inquiry"
+  },
+  {
+    "_id": "68d9b675d73b06e10e06d84e",
+    "message": "hello",
+    "timestamp": "2025-09-28T22:28:05.132Z",
+    "senderType": "user",
+    "chat": {
+      "$ref": "chats",
+      "$id": "68d9b633d73b06e10e06d84d"
+    },
+    "_class": "com.petadoption.backend.model.Inquiry"
+  },
+  {
+    "_id": "68d9b8d3d73b06e10e06d853",
+    "message": "hello",
+    "timestamp": "2025-09-28T22:38:11.022Z",
+    "senderType": "user",
+    "chat": {
+      "$ref": "chats",
+      "$id": "68d9b8c7d73b06e10e06d852"
+    },
+    "_class": "com.petadoption.backend.model.Inquiry"
+  },
+  {
+    "_id": "68d9bbea76ee76dd38ab685e",
+    "message": "hello",
+    "timestamp": "2025-09-28T22:51:22.470Z",
+    "senderType": "user",
+    "chat": {
+      "$ref": "chats",
+      "$id": "68d9bbe376ee76dd38ab685d"
+    },
+    "_class": "com.petadoption.backend.model.Inquiry"
+  },
+  {
+    "_id": "68d9caa060163a872fedd70d",
+    "message": "hrlloo'",
+    "timestamp": "2025-09-28T23:54:08.631Z",
+    "senderType": "user",
+    "user": {
+      "$ref": "users",
+      "$id": "68d9be9b76ee76dd38ab686d"
+    },
+    "chat": {
+      "$ref": "chats",
+      "$id": "68d9ca9860163a872fedd70c"
+    },
+    "_class": "com.petadoption.backend.model.Inquiry"
+  }
+]

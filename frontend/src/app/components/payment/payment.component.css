@@ -1,0 +1,178 @@
+.payment-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.payment-header h2 {
+  color: #333;
+  margin: 0;
+}
+
+.pet-summary {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.pet-image {
+  flex-shrink: 0;
+}
+
+.pet-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.no-image {
+  width: 120px;
+  height: 120px;
+  background: #e9ecef;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.pet-details h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.pet-details p {
+  margin: 0.25rem 0;
+  color: #666;
+}
+
+.payment-form {
+  margin-top: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.card-element {
+  padding: 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: white;
+  font-size: 1rem;
+}
+
+.card-element.StripeElement--focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.card-errors {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid #f5c6cb;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.pay-button, .cancel-button {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pay-button {
+  background: #28a745;
+  color: white;
+}
+
+.pay-button:hover:not(:disabled) {
+  background: #218838;
+}
+
+.pay-button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background: #6c757d;
+  color: white;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background: #545b62;
+}
+
+.cancel-button:disabled {
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .payment-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .pet-summary {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pet-image img, .no-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .pay-button, .cancel-button {
+    width: 100%;
+  }
+}

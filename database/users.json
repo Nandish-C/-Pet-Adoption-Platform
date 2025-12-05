@@ -1,0 +1,46 @@
+[
+  {
+    "_id": "user1",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "role": "USER"
+  },
+  {
+    "_id": "user2",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "role": "USER"
+  },
+  {
+    "_id": "user3",
+    "name": "Bob Johnson",
+    "email": "bob@example.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "role": "USER"
+  },
+  {
+    "_id": "admin1",
+    "name": "Admin User",
+    "email": "admin@example.com",
+    "password": "$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi",
+    "role": "ADMIN"
+  },
+  {
+    "_id": "68d9b25dd73b06e10e06d83c",
+    "name": "Pet Agent",
+    "email": "pet@email.com",
+    "password": "$2a$10$91AsW5QympgBgWRaspux9.ROdM3pMuoGj.5N1fkBNs6ibwy3QSE1a",
+    "role": "ADMIN",
+    "_class": "com.petadoption.backend.model.User"
+  },
+  {
+    "_id": "68d9be9b76ee76dd38ab686d",
+    "name": "Tester",
+    "email": "tester@gmail.com",
+    "password": "$2a$10$G0rrOJk2SZrOMMVhrbTEyeLrYZ77d2HabAXnCJv1cpDqZ9nDLjgty",
+    "role": "USER",
+    "_class": "com.petadoption.backend.model.User"
+  }
+]

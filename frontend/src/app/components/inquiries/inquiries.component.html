@@ -1,0 +1,76 @@
+<div class="container mt-4">
+  <h2>My Inquiries</h2>
+  <p class="text-muted">Track your pet adoption inquiries and messages.</p>
+
+  <!-- New Inquiry Form -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5>Submit New Inquiry</h5>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="petSelect" class="form-label">Select Pet</label>
+            <select class="form-control" id="petSelect" [(ngModel)]="selectedPetId" name="petSelect" required>
+              <option value="">Choose a pet...</option>
+              <option *ngFor="let pet of availablePets" [value]="pet.id">{{ pet.name }} ({{ pet.species }})</option>
+            </select>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="shelterSelect" class="form-label">Select Shelter</label>
+            <select class="form-control" id="shelterSelect" [(ngModel)]="selectedShelterId" name="shelterSelect" required>
+              <option value="">Choose a shelter...</option>
+              <option *ngFor="let shelter of shelters" [value]="shelter.id">{{ shelter.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="inquiryMessage" class="form-label">Message</label>
+          <textarea class="form-control" id="inquiryMessage" [(ngModel)]="inquiryMessage" name="inquiryMessage" rows="4" placeholder="Tell us why you're interested in this pet..." required></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="submitInquiry()" [disabled]="!selectedPetId || !selectedShelterId || !inquiryMessage || submitting">
+          <span *ngIf="submitting" class="spinner-border spinner-border-sm" role="status"></span>
+          {{ submitting ? 'Submitting...' : 'Submit Inquiry' }}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Existing Inquiries -->
+  <div class="card">
+    <div class="card-header">
+      <h5>My Inquiries</h5>
+    </div>
+    <div class="card-body">
+      <div *ngIf="loading" class="text-center">
+        <p>Loading inquiries...</p>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+
+      <div *ngIf="!loading && !error && inquiries.length === 0" class="alert alert-info">
+        You haven't submitted any inquiries yet.
+      </div>
+
+      <div *ngFor="let inquiry of inquiries" class="border rounded p-3 mb-3">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h6 class="mb-1">{{ inquiry.petName }} at {{ inquiry.shelterName }}</h6>
+            <p class="mb-2 text-muted small">{{ inquiry.createdAt | date:'medium' }}</p>
+            <p class="mb-2">{{ inquiry.message }}</p>
+          </div>
+          <span class="badge" [ngClass]="getStatusBadgeClass(inquiry.status)">
+            {{ inquiry.status }}
+          </span>
+        </div>
+        <div class="mt-2">
+          <button class="btn btn-sm btn-outline-primary me-2" (click)="viewInquiryDetails(inquiry.id)">View Details</button>
+          <button class="btn btn-sm btn-outline-success" (click)="startChat(inquiry.id)">Start Chat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

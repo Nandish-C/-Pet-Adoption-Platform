@@ -1,0 +1,330 @@
+[
+  {
+    "_id": "msg1",
+    "chatId": "chat1",
+    "senderType": "user",
+    "message": "Hi, I'm interested in adopting Buddy. Can you tell me more about him?",
+    "timestamp": "2024-01-01T10:05:00.000Z"
+  },
+  {
+    "_id": "msg2",
+    "chatId": "chat1",
+    "senderType": "admin",
+    "message": "Hello! Buddy is a 2-year-old Golden Retriever. He's very friendly and good with families. Would you like to schedule a meet and greet?",
+    "timestamp": "2024-01-01T10:10:00.000Z"
+  },
+  {
+    "_id": "msg3",
+    "chatId": "chat2",
+    "senderType": "user",
+    "message": "Is Max good with small children?",
+    "timestamp": "2024-01-02T14:35:00.000Z"
+  },
+  {
+    "_id": "msg4",
+    "chatId": "chat2",
+    "senderType": "admin",
+    "message": "Yes, Max is great with children! He's very gentle and patient. He's been around kids before and loves playing with them.",
+    "timestamp": "2024-01-02T14:40:00.000Z"
+  },
+  {
+    "_id": "68d9bd3c76ee76dd38ab6863",
+    "content": "hey",
+    "timestamp": "2025-09-28T22:57:00.454Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9bd3076ee76dd38ab6862"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9bd6876ee76dd38ab6865",
+    "content": "hey",
+    "timestamp": "2025-09-28T22:57:44.478Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9b25dd73b06e10e06d83c"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9bd6376ee76dd38ab6864"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9bd8376ee76dd38ab6866",
+    "content": "hello",
+    "timestamp": "2025-09-28T22:58:11.635Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9b25dd73b06e10e06d83c"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9bd6376ee76dd38ab6864"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9bd9476ee76dd38ab6867",
+    "content": "hello",
+    "timestamp": "2025-09-28T22:58:28.637Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9bd6376ee76dd38ab6864"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9bdb376ee76dd38ab6869",
+    "content": "hello",
+    "timestamp": "2025-09-28T22:58:59.270Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9b25dd73b06e10e06d83c"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9bdac76ee76dd38ab6868"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9beca76ee76dd38ab686f",
+    "content": "hey",
+    "timestamp": "2025-09-28T23:03:38.815Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9bec676ee76dd38ab686e"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c01476ee76dd38ab6876",
+    "content": "hello",
+    "timestamp": "2025-09-28T23:09:08.996Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9bec676ee76dd38ab686e"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c60e60163a872fedd6f6",
+    "content": "hey",
+    "timestamp": "2025-09-28T23:34:38.269Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9be9b76ee76dd38ab686d"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c60860163a872fedd6f5"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c63560163a872fedd6f8",
+    "content": "hello",
+    "timestamp": "2025-09-28T23:35:17.572Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9b25dd73b06e10e06d83c"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c62e60163a872fedd6f7"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c67560163a872fedd6fa",
+    "content": "hey",
+    "timestamp": "2025-09-28T23:36:21.130Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9b25dd73b06e10e06d83c"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c62e60163a872fedd6f7"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c7c360163a872fedd6fe",
+    "content": "how are you",
+    "timestamp": "2025-09-28T23:41:55.771Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9be9b76ee76dd38ab686d"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c7b460163a872fedd6fd"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c7e660163a872fedd700",
+    "content": "hello",
+    "timestamp": "2025-09-28T23:42:30.788Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9be9b76ee76dd38ab686d"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c7e160163a872fedd6ff"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c80060163a872fedd701",
+    "content": "hey",
+    "timestamp": "2025-09-28T23:42:56.736Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c7e160163a872fedd6ff"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c81360163a872fedd702",
+    "content": "are u ok",
+    "timestamp": "2025-09-28T23:43:15.306Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9be9b76ee76dd38ab686d"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c7e160163a872fedd6ff"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c81a60163a872fedd703",
+    "content": "yes",
+    "timestamp": "2025-09-28T23:43:22.168Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c7e160163a872fedd6ff"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c87e60163a872fedd704",
+    "content": "hello",
+    "timestamp": "2025-09-28T23:45:02.432Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9bdac76ee76dd38ab6868"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c8a660163a872fedd706",
+    "content": "just",
+    "timestamp": "2025-09-28T23:45:42.974Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9b25dd73b06e10e06d83c"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c89060163a872fedd705"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c8c660163a872fedd707",
+    "content": "ok",
+    "timestamp": "2025-09-28T23:46:14.560Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c89060163a872fedd705"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c95f60163a872fedd709",
+    "content": "hello",
+    "timestamp": "2025-09-28T23:48:47.820Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "68d9b25dd73b06e10e06d83c"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c95760163a872fedd708"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  },
+  {
+    "_id": "68d9c98b60163a872fedd70a",
+    "content": "hey",
+    "timestamp": "2025-09-28T23:49:31.852Z",
+    "isRead": false,
+    "sender": {
+      "$ref": "users",
+      "$id": "admin1"
+    },
+    "userChat": {
+      "$ref": "user_chats",
+      "$id": "68d9c95760163a872fedd708"
+    },
+    "_class": "com.petadoption.backend.model.UserMessage"
+  }
+]

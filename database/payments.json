@@ -1,0 +1,36 @@
+[
+  {
+    "_id": "payment1",
+    "userId": "user1",
+    "petId": null,
+    "adoptionId": null,
+    "amount": 50,
+    "status": "succeeded",
+    "stripePaymentIntentId": "pi_123",
+    "createdAt": "2024-01-03T14:01:00.000Z"
+  },
+  {
+    "_id": "68d9a4aed73b06e10e06d829",
+    "userId": "68d96a05bd7882bfae60137c",
+    "petId": "pet3",
+    "amount": 12000,
+    "currency": "INR",
+    "displayAmount": 894000,
+    "status": "succeeded",
+    "paymentMethod": "cod",
+    "createdAt": "2025-09-28T21:12:14.173Z",
+    "_class": "com.petadoption.backend.model.Payment"
+  },
+  {
+    "_id": "68d9b856d73b06e10e06d84f",
+    "userId": "68d9b25dd73b06e10e06d83c",
+    "petId": "pet7",
+    "amount": 16000,
+    "currency": "INR",
+    "displayAmount": 1192000,
+    "status": "succeeded",
+    "paymentMethod": "cod",
+    "createdAt": "2025-09-28T22:36:06.595Z",
+    "_class": "com.petadoption.backend.model.Payment"
+  }
+]

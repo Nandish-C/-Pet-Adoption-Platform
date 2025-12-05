@@ -1,0 +1,34 @@
+<div class="container mt-4">
+  <h2>My Adoptions</h2>
+  <p class="text-muted">View your successfully adopted pets.</p>
+
+  <div *ngIf="loading" class="text-center">
+    <p>Loading your adoptions...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && adoptions.length === 0" class="alert alert-info">
+    No adoptions found. Start adopting pets today!
+  </div>
+
+  <div *ngIf="adoptions.length > 0" class="row">
+    <div *ngFor="let adoption of adoptions" class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Adoption #{{ adoption.id }}</h5>
+          <p class="card-text"><strong>Pet ID:</strong> {{ adoption.petId }}</p>
+          <p class="card-text"><strong>Status:</strong> 
+            <span [class]="adoption.status === 'COMPLETED' ? 'badge bg-success' : 'badge bg-warning'">
+              {{ adoption.status }}
+            </span>
+          </p>
+          <p class="card-text"><strong>Date:</strong> {{ adoption.createdAt | date:'medium' }}</p>
+          <p class="card-text"><strong>Payment ID:</strong> {{ adoption.paymentId || 'N/A' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

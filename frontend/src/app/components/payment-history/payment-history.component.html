@@ -1,0 +1,52 @@
+<div class="payment-history-container">
+  <h2>Transaction History</h2>
+
+  <div *ngIf="loading" class="loading">
+    Loading transaction history...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && !error && combinedHistory.length === 0" class="no-payments">
+    No transaction history found.
+  </div>
+
+  <div *ngIf="!loading && !error && combinedHistory.length > 0" class="payments-list">
+    <table class="payments-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Details</th>
+          <th>Amount</th>
+          <th>Currency</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of combinedHistory">
+          <td>
+            <span class="transaction-type" [ngClass]="{'payment-type': item.type === 'payment', 'donation-type': item.type === 'donation'}">
+              {{ item.type === 'payment' ? 'Pet Adoption' : 'Donation' }}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="item.type === 'payment'">
+              Pet ID: {{ item.petId }}
+            </span>
+            <span *ngIf="item.type === 'donation'">
+              {{ item.message || 'Donation to shelter' }}
+              <span *ngIf="item.shelterId"> (Shelter: {{ item.shelterId }})</span>
+            </span>
+          </td>
+          <td>{{ item.displayAmount || item.amount }}</td>
+          <td>{{ item.currency }}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.date | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="home-container" *ngIf="!loading && !error">
+    <div class="home-header">
+      <h1>🐾 Find Your Perfect Companion</h1>
+      <p>Discover loving pets waiting for their forever homes. Each adoption brings joy to both you and your new furry friend!</p>
+    </div>
+
+    <div class="pet-grid">
+      <div class="pet-card" *ngFor="let pet of pets">
+        <img [src]="pet.imageUrl ? (pet.imageUrl.startsWith('http') ? pet.imageUrl : 'http://localhost:8080' + pet.imageUrl) : 'https://via.placeholder.com/200x150?text=Pet'" [alt]="pet.name" class="pet-image clickable-image" (click)="openImageModal(pet)">
+        <div class="pet-info">
+          <h3>{{ pet.name }}</h3>
+          <span class="pet-species">{{ pet.species }}</span>
+          <p><strong>Breed:</strong> {{ pet.breed }}</p>
+          <p><strong>Age:</strong> {{ pet.age }} years old</p>
+          <div class="pricing-info">
+            <p class="pet-price">Pet Cost: ₹{{ pet.price || 'Contact for price' }}</p>
+            <p class="pet-fee">Adoption Fee: ₹{{ pet.adoptionFee || 'Contact for price' }}</p>
+            <p class="pet-total">Total: ₹{{ (pet.price || 0) + (pet.adoptionFee || 0) || 'Contact for price' }}</p>
+          </div>
+          <p><strong>Status:</strong> <span class="status available">{{ pet.status }}</span></p>
+        </div>
+        <button class="adopt-btn" (click)="buyPet(pet.id)" [disabled]="pet.status !== 'available'">
+          <span *ngIf="pet.status === 'available'">❤️ Adopt Now</span>
+          <span *ngIf="pet.status !== 'available'">Not Available</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Modal -->
+  <div class="modal fade" id="imageModal" tabindex="-1" [class.show]="selectedPetForModal" [style.display]="selectedPetForModal ? 'block' : 'none'" *ngIf="selectedPetForModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ selectedPetForModal?.name }} - Full Image</h5>
+          <button type="button" class="btn-close" (click)="closeImageModal()"></button>
+        </div>
+        <div class="modal-body text-center">
+          <img [src]="selectedPetForModal?.imageUrl ? (selectedPetForModal.imageUrl.startsWith('http') ? selectedPetForModal.imageUrl : 'http://localhost:8080' + selectedPetForModal.imageUrl) : 'https://via.placeholder.com/600x400?text=No+Image'"
+               [alt]="selectedPetForModal?.name"
+               class="img-fluid rounded"
+               style="max-height: 70vh; object-fit: contain;">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeImageModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="buyPet(selectedPetForModal.id)" [disabled]="selectedPetForModal.status !== 'available'" *ngIf="selectedPetForModal">Adopt Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Backdrop -->
+  <div class="modal-backdrop fade show" *ngIf="selectedPetForModal" (click)="closeImageModal()"></div>
+
+<div *ngIf="loading" class="loading">Loading pets...</div>
+<div *ngIf="error" class="error">{{ error }}</div>

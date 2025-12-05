@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "shelter1",
+    "name": "City Animal Shelter",
+    "location": "New York, NY",
+    "phone": "+1-555-0123",
+    "email": "info@cityanimalshelter.org"
+  },
+  {
+    "_id": "shelter2",
+    "name": "Happy Tails Rescue",
+    "location": "Los Angeles, CA",
+    "phone": "+1-555-0456",
+    "email": "adopt@happytailsrescue.com"
+  }
+]

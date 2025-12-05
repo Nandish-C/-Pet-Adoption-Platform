@@ -1,0 +1,153 @@
+<div class="container">
+  <h2>🐕 Find Your Perfect Pet Match</h2>
+  <p class="text-muted">Tell us about your preferences and we'll find the best pets for you!</p>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5>🎯 Matching Criteria</h5>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label for="species" class="form-label">🐾 Species</label>
+              <select class="form-control" id="species" [(ngModel)]="matchingCriteria.species" name="species">
+                <option value="">Any</option>
+                <option value="Dog">🐕 Dog</option>
+                <option value="Cat">🐱 Cat</option>
+                <option value="Bird">🐦 Bird</option>
+                <option value="Rabbit">🐰 Rabbit</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="breed" class="form-label">🏷️ Breed</label>
+              <input type="text" class="form-control" id="breed" [(ngModel)]="matchingCriteria.breed" name="breed" placeholder="e.g., Labrador">
+            </div>
+
+            <div class="mb-3">
+              <label for="size" class="form-label">📏 Size</label>
+              <select class="form-control" id="size" [(ngModel)]="matchingCriteria.size" name="size">
+                <option value="">Any</option>
+                <option value="Small">🐾 Small</option>
+                <option value="Medium">🐕 Medium</option>
+                <option value="Large">🦮 Large</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="energyLevel" class="form-label">⚡ Energy Level</label>
+              <select class="form-control" id="energyLevel" [(ngModel)]="matchingCriteria.energyLevel" name="energyLevel">
+                <option value="">Any</option>
+                <option value="Low">😴 Low</option>
+                <option value="Medium">🏃 Medium</option>
+                <option value="High">🚀 High</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="minAge" class="form-label">🎂 Age Range (years)</label>
+              <div class="row">
+                <div class="col-6">
+                  <input type="number" class="form-control" placeholder="Min" [(ngModel)]="matchingCriteria.ageRange.min" name="minAge">
+                </div>
+                <div class="col-6">
+                  <input type="number" class="form-control" placeholder="Max" [(ngModel)]="matchingCriteria.ageRange.max" name="maxAge">
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="budget" class="form-label">💰 Max Budget (₹)</label>
+              <input type="number" class="form-control" id="budget" [(ngModel)]="matchingCriteria.budget" name="budget" placeholder="Enter maximum budget">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">👨‍👩‍👧‍👦 Compatibility</label>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="goodWithKids" [(ngModel)]="matchingCriteria.goodWithKids" name="goodWithKids">
+                <label class="form-check-label" for="goodWithKids">👶 Good with kids</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="goodWithPets" [(ngModel)]="matchingCriteria.goodWithPets" name="goodWithPets">
+                <label class="form-check-label" for="goodWithPets">🐾 Good with other pets</label>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="findMatches()" [disabled]="isLoading">
+              <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status"></span>
+              🔍 Find My Perfect Match
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5>💖 Your Perfect Matches</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="matchedPets.length === 0 && !isLoading" class="text-center">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">😔</div>
+            <h5>No pets match your criteria</h5>
+            <p class="text-muted">Try adjusting your preferences to find more matches!</p>
+          </div>
+
+          <div class="pet-grid-results">
+          <div *ngFor="let pet of matchedPets" class="pet-card-result">
+            <img [src]="pet.imageUrl ? (pet.imageUrl.startsWith('http') ? pet.imageUrl : 'http://localhost:8080' + pet.imageUrl) : 'https://via.placeholder.com/200x150?text=Pet'" [alt]="pet.name" class="pet-image-result clickable-image" (click)="openImageModal(pet)">
+            <div class="pet-info-result">
+              <h6>{{ pet.name }}</h6>
+              <span class="pet-species-result">{{ pet.species }}</span>
+              <p><strong>Breed:</strong> {{ pet.breed }}</p>
+              <p><strong>Age:</strong> {{ pet.age }} years old</p>
+              <p><strong>Size:</strong> {{ pet.size }}</p>
+              <div class="pricing-info">
+                <p class="pet-price-result">Pet Cost: ₹{{ pet.price || 'Contact for price' }}</p>
+                <p class="pet-fee-result">Adoption Fee: ₹{{ pet.adoptionFee || 'Contact for price' }}</p>
+                <p class="pet-total-result">Total: ₹{{ (pet.price || 0) + (pet.adoptionFee || 0) || 'Contact for price' }}</p>
+              </div>
+              <p><strong>Status:</strong> <span class="badge badge-success">Available</span></p>
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary-sm" (click)="viewPetDetails(pet.id)">
+                  👁️ View Details
+                </button>
+                <button class="btn btn-success-sm" (click)="adoptPet(pet.id)" [disabled]="pet.status !== 'available'">
+                  ❤️ Adopt Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+        <!-- Image Modal -->
+        <div class="modal fade" id="imageModal" tabindex="-1" [class.show]="selectedPetForModal" [style.display]="selectedPetForModal ? 'block' : 'none'" *ngIf="selectedPetForModal">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">{{ selectedPetForModal?.name }} - Full Image</h5>
+                <button type="button" class="btn-close" (click)="closeImageModal()"></button>
+              </div>
+              <div class="modal-body text-center">
+                <img [src]="selectedPetForModal?.imageUrl ? (selectedPetForModal.imageUrl.startsWith('http') ? selectedPetForModal.imageUrl : 'http://localhost:8080' + selectedPetForModal.imageUrl) : 'https://via.placeholder.com/600x400?text=No+Image'"
+                     [alt]="selectedPetForModal?.name"
+                     class="img-fluid rounded"
+                     style="max-height: 70vh; object-fit: contain;">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeImageModal()">Close</button>
+                <button type="button" class="btn btn-primary" (click)="adoptPet(selectedPetForModal.id)" [disabled]="selectedPetForModal.status !== 'available'" *ngIf="selectedPetForModal">Adopt Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Backdrop -->
+        <div class="modal-backdrop fade show" *ngIf="selectedPetForModal" (click)="closeImageModal()"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "adoption1",
+    "userId": "user1",
+    "petId": "pet1",
+    "status": "pending",
+    "createdAt": "2024-01-02T12:00:00.000Z"
+  },
+  {
+    "_id": "68d9a4aed73b06e10e06d82a",
+    "petId": "pet3",
+    "userId": "68d96a05bd7882bfae60137c",
+    "paymentId": "68d9a4aed73b06e10e06d829",
+    "status": "completed",
+    "createdAt": "2025-09-28T21:12:14.317Z",
+    "_class": "com.petadoption.backend.model.Adoption"
+  },
+  {
+    "_id": "68d9b856d73b06e10e06d850",
+    "petId": "pet7",
+    "userId": "68d9b25dd73b06e10e06d83c",
+    "paymentId": "68d9b856d73b06e10e06d84f",
+    "status": "completed",
+    "createdAt": "2025-09-28T22:36:06.691Z",
+    "_class": "com.petadoption.backend.model.Adoption"
+  }
+]

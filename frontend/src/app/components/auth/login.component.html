@@ -1,0 +1,68 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="auth-icon">
+        <span class="icon-emoji">🐾</span>
+      </div>
+      <h1>Welcome Back!</h1>
+      <p class="auth-subtitle">Sign in to find your perfect pet companion</p>
+    </div>
+
+    <form class="auth-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email" class="form-label">
+          <span class="label-icon">📧</span> Email Address
+        </label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          class="form-input"
+          placeholder="Enter your email"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">
+          <span class="label-icon">🔒</span> Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          class="form-input"
+          placeholder="Enter your password"
+          required>
+      </div>
+
+      <button type="submit" class="auth-btn" [disabled]="!email || !password">
+        <span class="btn-icon">🚪</span>
+        <span class="btn-text">Sign In</span>
+        <div class="btn-shine"></div>
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      <div *ngIf="error" class="alert alert-error">
+        <span class="alert-icon">⚠️</span>
+        <span>{{ error }}</span>
+      </div>
+
+      <div class="auth-links">
+        <p>Don't have an account?
+          <a routerLink="/register" class="auth-link">
+            <span class="link-icon">✨</span> Create Account
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-decoration">
+    <div class="floating-pet pet-1">🐕</div>
+    <div class="floating-pet pet-2">🐱</div>
+    <div class="floating-pet pet-3">🐦</div>
+  </div>
+</div>

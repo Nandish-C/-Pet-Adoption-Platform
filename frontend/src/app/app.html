@@ -1,0 +1,138 @@
+<div class="d-flex flex-column min-vh-100">
+  <header class="navbar">
+    <div class="d-flex justify-content-between align-items-center w-100 px-4 py-3">
+      <h2 class="mb-0">🐾 Pet Adoption Platform</h2>
+      <div class="d-flex align-items-center">
+        <!-- Theme Toggle Button -->
+        <button class="btn btn-outline-light me-3 rounded-circle" (click)="toggleTheme()" title="Toggle Theme" style="width: 40px; height: 40px;">
+          <i class="bi" [ngClass]="currentTheme === 'light' ? 'bi-moon-stars' : 'bi-sun'"></i>
+        </button>
+
+        <!-- Before Login Navigation -->
+        <div *ngIf="!loggedIn" class="d-flex align-items-center">
+          <a class="btn btn-outline-light me-2" routerLink="/home" routerLinkActive="active">
+            🏠 Home
+          </a>
+          <a class="btn btn-outline-light me-2" routerLink="/login" routerLinkActive="active">
+            🔐 Login
+          </a>
+          <a class="btn btn-success" routerLink="/register" routerLinkActive="active">
+            ✨ Register
+          </a>
+        </div>
+
+        <!-- After Login Navigation -->
+        <div *ngIf="loggedIn" class="d-flex align-items-center">
+          <span class="me-3 text-light">
+            👋 Welcome, <strong>{{ username }}</strong>
+          </span>
+          <button class="btn btn-outline-light" (click)="logout()">
+            🚪 Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="d-flex flex-grow-1">
+    <!-- Sidebar Menu -->
+    <nav class="sidebar-nav">
+      <div class="sidebar-header">
+        <h5 class="mb-4">📱 Navigation</h5>
+      </div>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2" *ngIf="!(loggedIn && userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/home" routerLinkActive="active">
+            <span class="me-3 fs-5">🏠</span> <span class="nav-text">Home</span>
+          </a>
+        </li>
+        <li class="nav-item mb-2" *ngIf="!(loggedIn && userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/match-pets" routerLinkActive="active">
+            <span class="me-3 fs-5">🔍</span> <span class="nav-text">Match Pets</span>
+          </a>
+        </li>
+        <li class="nav-item mb-2" *ngIf="!(loggedIn && userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/donate" routerLinkActive="active">
+            <span class="me-3 fs-5">💝</span> <span class="nav-text">Donate</span>
+          </a>
+        </li>
+
+        <li class="nav-item mb-2" *ngIf="loggedIn && !(userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/shelters" routerLinkActive="active">
+            <span class="me-3 fs-5">🏢</span> <span class="nav-text">Shelters</span>
+          </a>
+        </li>
+        <li class="nav-item mb-2" *ngIf="loggedIn && !(userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/inquiries" routerLinkActive="active">
+            <span class="me-3 fs-5">❓</span> <span class="nav-text">Inquiries</span>
+          </a>
+        </li>
+        <li class="nav-item mb-2" *ngIf="loggedIn && !(userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/adoptions" routerLinkActive="active">
+            <span class="me-3 fs-5">❤️</span> <span class="nav-text">My Adoptions</span>
+          </a>
+        </li>
+        <li class="nav-item mb-2" *ngIf="loggedIn && !(userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/payment-history" routerLinkActive="active">
+            <span class="me-3 fs-5">💳</span> <span class="nav-text">Payment History</span>
+          </a>
+        </li>
+        <li class="nav-item mb-2" *ngIf="loggedIn && !(userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/general-chat" routerLinkActive="active">
+            <span class="me-3 fs-5">💬</span> <span class="nav-text">Support Chat</span>
+          </a>
+        </li>
+        <li class="nav-item mb-2" *ngIf="loggedIn && !(userRole === 'ADMIN')">
+          <a class="nav-link d-flex align-items-center" routerLink="/user-chat" routerLinkActive="active">
+            <span class="me-3 fs-5">👥</span> <span class="nav-text">User Chat</span>
+          </a>
+        </li>
+
+        <!-- Admin Menu Items -->
+        <li class="nav-item mb-2" *ngIf="loggedIn && userRole === 'ADMIN'">
+          <hr class="my-4 sidebar-divider">
+          <div class="admin-section">
+            <h6 class="text-center mb-3">👑 Admin Panel</h6>
+          </div>
+        </li>
+        <li class="nav-item mb-2" *ngIf="loggedIn && userRole === 'ADMIN'">
+          <a class="nav-link d-flex align-items-center admin-link" routerLink="/admin" routerLinkActive="active">
+            <span class="me-3 fs-5">📊</span> <span class="nav-text">Dashboard</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Main Content -->
+    <main class="flex-grow-1 main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <!-- Floating Chat Button -->
+  <div *ngIf="!loggedIn || userRole !== 'ADMIN'" class="floating-chat-btn">
+    <button class="btn btn-info rounded-circle shadow-lg pulse-animation" (click)="showChat()" title="💬 Open Chat Support">
+      <span class="fs-4">💬</span>
+    </button>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h6>🐾 Pet Adoption Platform</h6>
+        <p>Finding forever homes for pets in need</p>
+      </div>
+      <div class="footer-section">
+        <h6>📞 Contact Us</h6>
+        <p>📧 support@petadoption.com</p>
+        <p>📱 +91-123-456-7890</p>
+      </div>
+      <div class="footer-section">
+        <h6>🔗 Quick Links</h6>
+        <p><a href="#" class="footer-link">About Us</a></p>
+        <p><a href="#" class="footer-link">Help & Support</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <small>© 2025 Pet Adoption Platform. Made with ❤️ for pets and their families.</small>
+    </div>
+  </footer>
+</div>

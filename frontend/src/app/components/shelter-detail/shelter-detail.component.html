@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <button class="btn btn-secondary mb-3" (click)="goBack()">← Back to Shelters</button>
+
+      <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Loading shelter details...</p>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+        <button class="btn btn-sm btn-outline-danger ms-2" (click)="retryLoad()">Retry</button>
+      </div>
+
+      <div *ngIf="shelter" class="card">
+        <div class="card-header">
+          <h2 class="card-title">{{ shelter.name }}</h2>
+          <p class="text-muted">{{ shelter.location }}</p>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ shelter.description }}</p>
+
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <button class="btn btn-primary w-100 mb-2" (click)="contactShelter()">
+                Contact Shelter
+              </button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-success w-100 mb-2" (click)="donateToShelter()">
+                Donate to Shelter
+              </button>
+            </div>
+          </div>
+
+          <hr>
+
+          <h5>Shelter Information</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Email:</strong> {{ shelter.email || 'Not provided' }}
+            </li>
+            <li class="list-group-item">
+              <strong>Phone:</strong> {{ shelter.phone || 'Not provided' }}
+            </li>
+            <li class="list-group-item">
+              <strong>Website:</strong>
+              <a *ngIf="shelter.website" [href]="shelter.website" target="_blank">{{ shelter.website }}</a>
+              <span *ngIf="!shelter.website">Not provided</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

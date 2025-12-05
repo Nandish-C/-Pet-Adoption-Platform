@@ -1,0 +1,47 @@
+<!-- Dynamic form fields based on section -->
+          <div *ngIf="activeSection === 'pets'" class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).name" name="name" required aria-label="Pet Name">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Species</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).species" name="species" required aria-label="Pet Species">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Breed</label>
+              <input type="text" class="form-control" [(ngModel)]="(editingItem || newItem).breed" name="breed" required aria-label="Pet Breed">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Age</label>
+              <input type="number" class="form-control" [(ngModel)]="(editingItem || newItem).age" name="age" required aria-label="Pet Age">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" [(ngModel)]="(editingItem || newItem).description" name="description" rows="3" aria-label="Pet Description"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-control" [(ngModel)]="(editingItem || newItem).status" name="status" required aria-label="Pet Status">
+                <option value="available">Available</option>
+                <option value="adopted">Adopted</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Pet Image</label>
+              <input type="file" class="form-control" accept="image/*" (change)="onFileSelected($event)" aria-label="Pet Image">
+              <small class="form-text text-muted">Select an image file (max 5MB)</small>
+            </div>
+            <div class="mb-3" *ngIf="imagePreview">
+              <label class="form-label">Image Preview</label>
+              <div class="text-center">
+                <img [src]="imagePreview" alt="Pet Image Preview" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+              </div>
+            </div>
+            <div class="mb-3" *ngIf="editingItem?.imageUrl && !imagePreview">
+              <label class="form-label">Current Image</label>
+              <div class="text-center">
+                <img [src]="'http://localhost:8080' + editingItem.imageUrl" alt="Current Pet Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+              </div>
+            </div>
+          </div>

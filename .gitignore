@@ -1,0 +1,120 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Build outputs
+dist/
+build/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# Java
+*.iml
+.idea/
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+target/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Spring Boot
+.mvn/
+mvnw
+mvnw.cmd
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Angular
+/dist/
+/tmp/
+/out-tsc/
+/bazel-out
+
+# Angular CLI
+.angular/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads (user-generated content)
+uploads/
+backend/uploads/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Socket server specific
+socket-server/node_modules/
+
+# Package manager files
+yarn.lock
+pnpm-lock.yaml
